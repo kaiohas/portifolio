@@ -1,0 +1,13 @@
+# Estudos e análises (texto + imagem + links)
+itens:
+  - titulo: Análise de Cohorts - Marketplace
+    resumo: Estudo de comportamento por safra de participantes e retenção.
+    imagem: "assets/sample_study_1.png"
+    texto_md: |
+      Este estudo explora métricas de **retenção** e **engajamento** por _cohort_,
+      com foco em conversão e resposta a campanhas. Inclui análises descritivas,
+      segmentações e recomendações.
+    tags: ["Cohort", "Retenção", "SQL", "Power BI"]
+    links:
+      - ["Apresentação", "https://example.com/apresentacao"]
+      - ["Notebook", "https://example.com/notebook"]

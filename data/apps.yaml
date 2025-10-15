@@ -1,0 +1,13 @@
+# Cards de apps desenvolvidos (imagens devem estar em /assets)
+apps:
+  - titulo: Controle de Estoque (Farmácia)
+    resumo: App local em Streamlit para entradas, saídas, validade com farol e relatórios.
+    imagem: "assets/sample_app_1.png"
+    detalhes: |
+      - Cadastro de produtos, tipos, localizações e responsáveis
+      - Controle de validade com farol (verde/amarelo/vermelho)
+      - Visão geral e listagem de lançamentos com editar/excluir
+    tags: ["Streamlit", "SQLite/Postgres", "Farmácia"]
+    links:
+      - ["Repositório", "https://github.com/seu_usuario/estoque_streamlit"]
+      - ["Demonstração", "https://seu-deploy.app"]

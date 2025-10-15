@@ -1,0 +1,11 @@
+# Liste aqui relatórios públicos do Power BI para embed (Publicar na Web)
+# ATENÇÃO: use apenas links "Publicar na Web" (iframe) ou a URL de visualização pública.
+# Para relatórios privados é necessário autenticação (não coberto aqui).
+relatorios:
+  - titulo: Painel de seguros Zurich
+    descricao: Um relatório destinado a analisar comportamento de seguros vendidos no formato B2C para coberturas de roubo e furto ou danos materiais.
+    url_iframe: "https://app.powerbi.com/view?r=eyJrIjoiZjU3MTY3MGUtZjE0Ni00NDY3LTgwN2UtNmMyMjAyNjQyMjFmIiwidCI6ImU4YjhiMzE2LTUyNzYtNGFhNS1iODIxLWIxMDM5M2ZhM2E4YSJ9"
+
+  - titulo: Painel Qualidade Eurofarma
+    descricao: Um relatório destinado a analisar a qualidade dos produtos da Eurofarma.
+    url_iframe: "https://app.powerbi.com/view?r=eyJrIjoiMzRiZDI5MTAtMTAwYy00ZTQ1LTgxNTktYjk0MTFmYjA0YjM5IiwidCI6ImU4YjhiMzE2LTUyNzYtNGFhNS1iODIxLWIxMDM5M2ZhM2E4YSJ9"
