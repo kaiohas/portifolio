@@ -29,7 +29,7 @@ with col2:
     # --- CONTATOS E LINKS ---
     st.write(
         "**Celular**: [11 91069-0905](tel:+5511910690905) | "
-        "**Email**: [kaio.alves123@gmail.com](mailto:kaio.alves123@gmail.com) | "
+        "**Email**: [kaiohas@hotmail.com](mailto:kaiohas@hotmail.com) | "
         "**LinkedIn**: [kaiohalves](https://www.linkedin.com/in/kaiohalves/) | "
         "**GitHub**: [kaiohas](https://github.com/kaiohas)"
     )
@@ -51,13 +51,20 @@ st.divider()
 
 # --- NAVEGAÇÃO RÁPIDA ---
 section_title("Navegue", "🧭")
-colA, colB, colC = st.columns(3)
-with colA:
-    st.page_link("pages/2_📊_PowerBI.py", label="Projetos Power BI", icon="📊")
-with colB:
-    st.page_link("pages/3_🧰_Apps.py", label="Apps", icon="🧰")
-with colC:
-    st.page_link("pages/4_📝_Estudos.py", label="Estudos & Análises", icon="📝")
+
+nav_items = [
+    ("pages/2_📊_PowerBI.py", "📊", "Projetos Power BI", "Dashboards e relatórios interativos desenvolvidos no Power BI"),
+    ("pages/3_🧰_Apps.py", "🧰", "Apps", "Aplicações web e mobile construídas do zero"),
+    ("pages/4_📝_Estudos.py", "📝", "Estudos & Análises", "Análises exploratórias e estudos de dados"),
+]
+
+for col, (page, icon, label, desc) in zip(st.columns(3, gap="large"), nav_items):
+    with col:
+        with st.container(border=True):
+            st.markdown(f"<div style='font-size:2.5rem; text-align:center; padding:0.5rem 0'>{icon}</div>", unsafe_allow_html=True)
+            st.markdown(f"<p style='text-align:center; font-weight:700; font-size:1.05rem; margin-bottom:0.25rem'>{label}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p style='text-align:center; font-size:0.85rem; opacity:0.7; margin-bottom:0.5rem'>{desc}</p>", unsafe_allow_html=True)
+            st.page_link(page, label="Acessar →", icon=icon)
 
 st.divider()
 

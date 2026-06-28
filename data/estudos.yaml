@@ -1,52 +1,105 @@
-# Estudos e análises (texto + imagem + links)
-itens:
-  - titulo: Painel de Seguros — Análise de Vendas B2C (Zurich)
-    resumo: Dashboard Power BI para monitoramento de apólices de seguro residencial e de veículos no canal B2C, com foco em roubo/furto e danos materiais.
-    imagem: "assets/sample_study_1.png"
-    texto_md: |
-      Desenvolvimento de painel gerencial para acompanhamento de indicadores comerciais de seguros.
+estudos:
+  - titulo: Segmentação de Engajamento
+    tipo: Segmentação
+    status: Em produção
+    resumo: Classifica toda a base de participantes em 4 perfis de engajamento, cruzando comportamento de compra e de resgate de pontos nos últimos 12 meses.
+    problema: |
+      Em uma base de dezenas de milhares de participantes de um programa de fidelidade, era preciso responder de forma confiável: quem está realmente engajado, quem acumulou pontos mas nunca usou, e quem abandonou a plataforma.
+    solucao: |
+      Construí uma matriz cruzando duas dimensões binárias observadas em janela de 12 meses — creditou pontos (comprou) e resgatou pontos (converteu o benefício). O cruzamento gera 4 segmentos:
 
-      **Principais análises:**
-      - Volume de apólices emitidas por período, produto e canal
-      - Taxa de sinistralidade e comparativo com metas
-      - Segmentação por perfil de cliente e região
-      - Tendências de renovação e churn
+      - **Ativo** — creditou e resgatou no período. Participante saudável, usa o ciclo completo do programa.
+      - **Inativo Resgate** — creditou, mas nunca resgatou. Comercialmente ativo, mas deixando valor na mesa.
+      - **Inativo Crédito** — resgatou, mas não creditou no período. Usa saldo acumulado sem reposição de compra.
+      - **Desengajado** — nenhuma ação no período.
+    achados: |
+      O achado mais relevante foi reposicionar o segmento "Inativo Resgate": numa leitura superficial parece desengajado, mas ao isolar compra de resgate, ficou claro que é um grupo comercialmente ativo. Isso mudou a estratégia de comunicação — em vez de reativação genérica, esse grupo passou a receber campanhas de incentivo ao resgate, com taxa de conversão muito mais alta.
+    stack:
+      fontes: Histórico de crédito e resgate de pontos, cadastro de participantes, calendário do programa
+      janela: 12 meses móveis, recalculado mensalmente
+      processamento: Databricks (PySpark/SQL), camada Delta Silver
+      entregavel: Dataset segmentado + dashboard de distribuição em Power BI
 
-      **Stack:** Power BI · DAX · Power Query · SQL Server
-    tags: ["Power BI", "DAX", "Seguros", "B2C", "KPIs"]
-    links:
-      - ["Ver no Power BI", "https://app.powerbi.com/view?r=eyJrIjoiZjU3MTY3MGUtZjE0Ni00NDY3LTgwN2UtNmMyMjAyNjQyMjFmIiwidCI6ImU4YjhiMzE2LTUyNzYtNGFhNS1iODIxLWIxMDM5M2ZhM2E4YSJ9"]
+  - titulo: Segmentação por Comportamento de Categoria
+    tipo: Segmentação
+    status: Em desenvolvimento
+    resumo: Cruza volume de compra, frequência e diversidade de portfólio para identificar onde estão as melhores oportunidades de cross-sell na base.
+    problema: |
+      Diferente da segmentação de engajamento, aqui a pergunta era comercial e específica: quem compra muito, com que frequência, e quão diversificado é o portfólio de categorias que cada participante compra?
+    solucao: |
+      Cruzei spend médio e frequência de compra (janela de 12 meses) em uma matriz de 4 quadrantes — Alto Spend, Potencial, Baixo Spend, Baixo Engajamento. Dentro de cada quadrante, adicionei uma segunda camada: cobertura de categorias (Alta = 4-5 categorias, Média = 2-3, Baixa = 1).
 
-  - titulo: Painel de Qualidade — Eurofarma
-    resumo: Relatório executivo de controle de qualidade de produtos farmacêuticos, acompanhando desvios, lotes e indicadores de conformidade.
-    imagem: "assets/sample_study_1.png"
-    texto_md: |
-      Painel desenvolvido para a área de Qualidade da Eurofarma, com foco em rastreabilidade e conformidade de lotes.
+      Essa camada extra é o que transforma a matriz em ferramenta de priorização de cross-sell — um participante de Alto Spend e Baixa Cobertura é uma oportunidade completamente diferente de um de Alto Spend e Alta Cobertura.
+    achados: |
+      Em análises de curva ABC na mesma base, entre 16% e 20% dos participantes (dependendo do canal) concentram a maior parte da receita — um padrão clássico de concentração que reforça a importância de tratar diferente os extremos da matriz, em vez de tratar a base como bloco único.
+    stack:
+      fontes: Histórico de compras (valor, data, categoria de produto), cadastro de participantes
+      janela: 12 meses móveis
+      processamento: Databricks (PySpark/SQL)
+      entregavel: Dataset segmentado por quadrante + matriz visual em Power BI
 
-      **Principais análises:**
-      - Indicadores de não-conformidades por linha de produção
-      - Acompanhamento de desvios e ações corretivas (CAPA)
-      - Evolução temporal de ocorrências por categoria
-      - Comparativo entre plantas e períodos
+  - titulo: "ICP — Índice Composto de Engajamento"
+    tipo: Score Composto
+    status: Em desenvolvimento
+    resumo: Score único de 0 a 100 que consolida venda, resgate, comunicação e suporte em um número comparável entre todos os participantes.
+    problema: |
+      As segmentações anteriores respondem perguntas específicas. Faltava uma resposta única: para ordenar toda a base por "nível de conexão com o programa", do maior para o menor, qual número usar?
+    solucao: |
+      Construí um índice composto a partir de 4 dimensões observadas em 12 meses — venda, resgate, comunicação (engajamento com campanhas) e suporte (histórico de chamados). Cada dimensão é normalizada para uma escala comum (0-100) antes de ser combinada, evitando que uma métrica de range maior domine o score.
 
-      **Stack:** Power BI · DAX · Power Query
-    tags: ["Power BI", "Qualidade", "Farmacêutico", "Conformidade", "DAX"]
-    links:
-      - ["Ver no Power BI", "https://app.powerbi.com/view?r=eyJrIjoiMzRiZDI5MTAtMTAwYy00ZTQ1LTgxNTktYjk0MTFmYjA0YjM5IiwidCI6ImU4YjhiMzE2LTUyNzYtNGFhNS1iODIxLWIxMDM5M2ZhM2E4YSJ9"]
+      Depois de ponderadas e somadas, o score final é segmentado em quartis (Q1 = menor engajamento, Q4 = maior).
+    achados: |
+      Um índice composto resolve um problema prático que segmentações isoladas não resolvem: priorização objetiva. Quando o time de relacionamento precisa decidir em quem investir tempo primeiro, ter um número único — em vez de quatro métricas que às vezes apontam em direções diferentes — torna a decisão replicável e cria linguagem comum entre dados, comercial e marketing.
+    stack:
+      fontes: Histórico de vendas, crédito e resgate, comunicação, chamados de suporte
+      janela: 12 meses móveis
+      processamento: Databricks (PySpark/SQL) — normalização e ponderação multi-dimensional
+      entregavel: Score por participante + dataset segmentado por quartil + dashboard
 
-  - titulo: Análise de Cohorts — Retenção em Marketplace
-    resumo: Estudo exploratório de comportamento por safra de participantes, com foco em retenção, engajamento e resposta a campanhas.
-    imagem: "assets/sample_study_1.png"
-    texto_md: |
-      Este estudo analisa o comportamento de usuários de um marketplace segmentados por **cohort de entrada**,
-      permitindo comparar a evolução de métricas ao longo do tempo entre diferentes grupos.
+  - titulo: Personas Comportamentais Baseadas em Dados
+    tipo: Estudo
+    status: Concluído
+    resumo: 7 personas construídas a partir de uma árvore de decisão hierárquica sobre uma base de 73.293 participantes, combinando compra, resgate, perfil agrícola e tendência ao longo do tempo.
+    problema: |
+      Ir além de segmentos puramente comportamentais e construir perfis que times de marketing, vendas e produto pudessem usar para pensar de forma humanizada sobre grupos de clientes — sem depender de personas fictícias construídas em workshop.
+    solucao: |
+      Usei uma árvore de decisão de 4 critérios aplicados em cascata sobre 3 janelas anuais de dados:
 
-      **Principais análises:**
-      - Curvas de retenção por cohort (D1, D7, D30)
-      - Taxa de conversão por safra e canal de aquisição
-      - Segmentação por comportamento de compra e recência
-      - Recomendações para campanhas de reativação
+      1. **Valor de compra** no último ano (alto valor ≥ R$ 100 mil vs. demais patamares)
+      2. **Recorrência** — comprou nos 3 anos consecutivos?
+      3. **Mix de categorias** — portfólio amplo (3+ categorias) ou concentrado (1-2)?
+      4. **Tendência** — valor de compra crescendo, estável ou caindo nos 3 anos?
 
-      **Stack:** SQL · Python (pandas) · Power BI
-    tags: ["Cohort", "Retenção", "SQL", "Python", "Marketplace"]
-    links: []
+      Essa lógica é determinística e auditável: qualquer participante pode ser reclassificado manualmente seguindo a mesma árvore. O resultado foram 7 personas com volumes e características muito distintas, cada uma com dados característicos e uma recomendação de ação prática.
+    achados: |
+      - Apenas **1,8%** da base compra um portfólio amplo (4-5 categorias), enquanto **30,1%** compra de só 1-2 categorias — evidência quantificada de oportunidade de cross-sell em escala.
+      - Uma única categoria de produto concentra a preferência de **mais de 70%** da base, orientando onde investir esforço de educação sobre categorias menos penetradas.
+      - Menos de **11%** da base resgata pontos, e dentro desse grupo a maioria resgata para uso pessoal — não profissional — revelando oportunidade de reposicionar o catálogo de resgate para incentivar reinvestimento no próprio negócio.
+    stack:
+      fontes: Histórico de vendas (3 janelas anuais), histórico de resgates, perfil agrícola/demográfico, histórico de créditos
+      volume: 73.293 participantes analisados
+      processamento: Databricks (PySpark/SQL) — árvore de decisão hierárquica
+      entregavel: Dataset classificado por persona + relatório descritivo + recomendações de ação por perfil
+
+  - titulo: Prateleira de Produtos de Dados
+    tipo: Produtificação
+    status: Em produção
+    resumo: Estruturação de 10 produtos de dados recorrentes organizados em 5 pilares estratégicos, cada um com escopo, dependências, esforço estimado e ciclo de entrega documentados.
+    problema: |
+      Transformar análises pontuais e ad-hoc em um catálogo de produtos que pudesse ser oferecido de forma recorrente e comparável — mudando a relação entre a área de dados e o negócio de "atende demanda por demanda" para "opera com catálogo conhecido".
+    solucao: |
+      Documentei cada produto com a mesma ficha técnica (tipo, objetivo, dependências, regras de negócio, entregável, impacto esperado, maturidade necessária do cliente, ciclo de entrega, esforço em horas) e organizei os 10 produtos em 5 pilares:
+
+      - **Burn** — engajar o produtor no resgate (Segmentação de Engajamento, ICP)
+      - **Comportamento** — conhecer quem é cada produtor (Personas, Segmentação por Categoria, Painel Gerencial)
+      - **Earn** — expandir portfólio e gerar receita (Coexistência entre Indústrias, Análise de Ações Extra do Motor)
+      - **Comunicação** — medir e otimizar cada disparo (Painel de Comunicação e Conversão)
+      - **Manutenção** — reter e reativar produtores (Farol de Pré-Churn, Agente de IA via Genie Space)
+    achados: |
+      **Estudo de caso — Farol de Pré-Churn:** diferentes produtores têm ciclos de compra completamente diferentes, então um alerta de inatividade com janela fixa (ex: "sem compra há 90 dias") gera ruído — dispara falso positivo para quem tem ciclo mais longo e chega tarde para quem tem ciclo mais curto.
+
+      A solução foi calcular o ciclo médio de compra individual de cada participante e comparar a inatividade atual contra esse ciclo personalizado, com um sistema de semáforo (verde/amarelo/vermelho) indicando o nível de risco. Essa lógica foi formalizada como produto recorrente com atualização semanal, permitindo ao time de growth trabalhar com lista priorizada sempre atualizada em vez de planilha estática.
+    stack:
+      fontes: Variam por produto — vendas, créditos, resgates, comunicação, chamados, cadastro
+      processamento: Databricks (PySpark/SQL), Genie Space para o agente de IA
+      entregavel: Datasets, dashboards Power BI, relatórios e agente conversacional

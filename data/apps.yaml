@@ -1,27 +1,72 @@
-# Cards de apps desenvolvidos (imagens devem estar em /assets)
-apps:
-  - titulo: DataLab CEMEC
-    resumo: Plataforma web corporativa para gestão de dados clínicos, farmácia, agenda e BI — com autenticação, controle de acesso por grupos e dashboards Power BI integrados.
-    imagem: "assets/sample_app_1.png"
-    detalhes: |
-      - Autenticação com Supabase e controle de acesso por perfis (Analyst / Developer / Admin)
-      - Módulo de Farmácia: cadastro de produtos, lançamentos, movimentações e visitas
-      - Módulo de Agenda: lançamentos, edição, relatórios e confirmações de consultas
-      - Módulo de Dimensões: tabelas de referência gerenciadas via interface
-      - Dashboards Power BI embutidos por grupo de acesso
-      - Painel de Analytics, Auditoria e Configurações
-      - Carregamento dinâmico de páginas via banco de dados (sem deploy a cada mudança)
-    tags: ["Streamlit", "Supabase", "Python", "Power BI", "Saúde"]
-    links:
-      - ["Repositório", "https://github.com/kaiohas/DATALAB_CEMEC"]
+# Cada app pode ter `modulos` (app multi-módulo com tabs) ou ser simples (sem modulos).
+# Para adicionar mídia: coloque o caminho em `imagem` (ex: "assets/demo.gif" ou "assets/demo.mp4").
+# Deixe `imagem: null` enquanto não tiver a gravação.
 
-  - titulo: Controle de Estoque (Farmácia)
-    resumo: App local em Streamlit para controle de entradas, saídas e vencimento de produtos com farol de alerta e relatórios gerenciais.
-    imagem: "assets/sample_app_1.png"
-    detalhes: |
-      - Cadastro de produtos, tipos, localizações e responsáveis
-      - Controle de validade com farol visual (verde / amarelo / vermelho)
-      - Visão geral e listagem de lançamentos com edição e exclusão
-      - Relatórios exportáveis por período
-    tags: ["Streamlit", "SQLite", "Python", "Farmácia"]
-    links: []
+apps:
+  - titulo: DataLab Pesquisa Clínica
+    resumo: Plataforma web corporativa para gestão de dados clínicos, com autenticação, controle de acesso por perfis e dashboards integrados. Desenvolvida para uso interno em clínica de pesquisa clínica.
+    stack: ["Streamlit", "Python", "Supabase", "PostgreSQL", "Power BI", "Databricks", "Plotly", "AgGrid", "Render"]
+    modulos:
+      - nome: Farmácia
+        icone: "💊"
+        descricao: Controle de estoque de medicamentos e insumos com farol de vencimento e rastreio completo de movimentações.
+        imagem: null
+        funcionalidades:
+          - "Cadastro de produtos, tipos, localizações e responsáveis"
+          - "Farol visual de vencimento: verde (OK) / laranja (atenção) / vermelho (vencido)"
+          - "Lançamento de entradas e saídas com histórico de movimentações"
+          - "Registro de visitas ao estoque"
+
+      - nome: Agenda
+        icone: "📅"
+        descricao: Gestão completa de agendamentos clínicos com controle de status por etapa, calendário e relatórios de tempo.
+        imagem: null
+        funcionalidades:
+          - "CRUD de agendamentos com múltiplos status (pendente, confirmado, realizado)"
+          - "Visão de calendário para controle da agenda"
+          - "Métricas de tempo por etapa clínica (médico, enfermagem, farmácia, espirometria, nutricionista)"
+          - "Confirmação e edição de consultas por coordenação"
+          - "Relatório de agenda com filtros por período, status e profissional"
+
+      - nome: Dados
+        icone: "📊"
+        descricao: Módulo de análise e visualização com relatórios clínicos, dashboards Power BI embutidos e integração com Databricks.
+        imagem: null
+        funcionalidades:
+          - "Relatórios de agenda com métricas consolidadas e exportação para Excel"
+          - "Revisão de dados de agendamentos por período"
+
+  - titulo: Mini Cabide
+    resumo: Marketplace two-sided para compra, venda e locação de produtos infantis usados — conectando vendedores a famílias que buscam alternativas acessíveis. Três interfaces independentes para cada perfil de uso.
+    stack: ["React", "TypeScript", "React Native", "Expo", "Supabase", "PostgreSQL", "Tailwind CSS", "Vite"]
+    modulos:
+      - nome: Gestão de Vendedores
+        icone: "🏪"
+        descricao: Painel web para vendedores gerenciarem seus produtos, pedidos e recebimentos.
+        imagem: null
+        funcionalidades:
+          - "Cadastro e gestão de produtos com upload de até 5 fotos por item"
+          - "Suporte a venda, locação ou ambos, com precificação independente"
+          - "Indicação de qualidade (Perfeita / Ótima / Boa) e faixa etária por produto"
+          - "Fluxo de aprovação com feedback antes do produto ir ao ar"
+          - "Gestão de pedidos recebidos e controle de estoque"
+          - "Solicitação de pagamento via PIX após venda concluída"
+
+      - nome: App Mobile
+        icone: "📱"
+        descricao: Aplicativo React Native/Expo para clientes compradores, disponível para iOS e Android.
+        imagem: null
+        funcionalidades:
+          - "Vitrine com busca e filtro por categoria (vestuário, brinquedos, móveis, eletrônicos...)"
+          - "Página de produto com fotos, preço de venda e/ou locação, condição e disponibilidade"
+          - "Carrinho de compras com ajuste de quantidade e resumo do pedido"
+          - "Acompanhamento de pedidos por status"
+          - "Perfil do cliente com endereços e preferências"
+
+      - nome: Versão Web
+        icone: "🌐"
+        descricao: Versão web responsiva equivalente ao app mobile, acessível pelo navegador.
+        imagem: null
+        funcionalidades:
+          - "Mesmas funcionalidades do app mobile em interface web responsiva"
+          - "Autenticação e isolamento de dados com Row Level Security (Supabase)"
