@@ -1,13 +1,27 @@
 # Cards de apps desenvolvidos (imagens devem estar em /assets)
 apps:
+  - titulo: DataLab CEMEC
+    resumo: Plataforma web corporativa para gestão de dados clínicos, farmácia, agenda e BI — com autenticação, controle de acesso por grupos e dashboards Power BI integrados.
+    imagem: "assets/sample_app_1.png"
+    detalhes: |
+      - Autenticação com Supabase e controle de acesso por perfis (Analyst / Developer / Admin)
+      - Módulo de Farmácia: cadastro de produtos, lançamentos, movimentações e visitas
+      - Módulo de Agenda: lançamentos, edição, relatórios e confirmações de consultas
+      - Módulo de Dimensões: tabelas de referência gerenciadas via interface
+      - Dashboards Power BI embutidos por grupo de acesso
+      - Painel de Analytics, Auditoria e Configurações
+      - Carregamento dinâmico de páginas via banco de dados (sem deploy a cada mudança)
+    tags: ["Streamlit", "Supabase", "Python", "Power BI", "Saúde"]
+    links:
+      - ["Repositório", "https://github.com/kaiohas/DATALAB_CEMEC"]
+
   - titulo: Controle de Estoque (Farmácia)
-    resumo: App local em Streamlit para entradas, saídas, validade com farol e relatórios.
+    resumo: App local em Streamlit para controle de entradas, saídas e vencimento de produtos com farol de alerta e relatórios gerenciais.
     imagem: "assets/sample_app_1.png"
     detalhes: |
       - Cadastro de produtos, tipos, localizações e responsáveis
-      - Controle de validade com farol (verde/amarelo/vermelho)
-      - Visão geral e listagem de lançamentos com editar/excluir
-    tags: ["Streamlit", "SQLite/Postgres", "Farmácia"]
-    links:
-      - ["Repositório", "https://github.com/seu_usuario/estoque_streamlit"]
-      - ["Demonstração", "https://seu-deploy.app"]
+      - Controle de validade com farol visual (verde / amarelo / vermelho)
+      - Visão geral e listagem de lançamentos com edição e exclusão
+      - Relatórios exportáveis por período
+    tags: ["Streamlit", "SQLite", "Python", "Farmácia"]
+    links: []

@@ -1,13 +1,52 @@
 # Estudos e análises (texto + imagem + links)
 itens:
-  - titulo: Análise de Cohorts - Marketplace
-    resumo: Estudo de comportamento por safra de participantes e retenção.
+  - titulo: Painel de Seguros — Análise de Vendas B2C (Zurich)
+    resumo: Dashboard Power BI para monitoramento de apólices de seguro residencial e de veículos no canal B2C, com foco em roubo/furto e danos materiais.
     imagem: "assets/sample_study_1.png"
     texto_md: |
-      Este estudo explora métricas de **retenção** e **engajamento** por _cohort_,
-      com foco em conversão e resposta a campanhas. Inclui análises descritivas,
-      segmentações e recomendações.
-    tags: ["Cohort", "Retenção", "SQL", "Power BI"]
+      Desenvolvimento de painel gerencial para acompanhamento de indicadores comerciais de seguros.
+
+      **Principais análises:**
+      - Volume de apólices emitidas por período, produto e canal
+      - Taxa de sinistralidade e comparativo com metas
+      - Segmentação por perfil de cliente e região
+      - Tendências de renovação e churn
+
+      **Stack:** Power BI · DAX · Power Query · SQL Server
+    tags: ["Power BI", "DAX", "Seguros", "B2C", "KPIs"]
     links:
-      - ["Apresentação", "https://example.com/apresentacao"]
-      - ["Notebook", "https://example.com/notebook"]
+      - ["Ver no Power BI", "https://app.powerbi.com/view?r=eyJrIjoiZjU3MTY3MGUtZjE0Ni00NDY3LTgwN2UtNmMyMjAyNjQyMjFmIiwidCI6ImU4YjhiMzE2LTUyNzYtNGFhNS1iODIxLWIxMDM5M2ZhM2E4YSJ9"]
+
+  - titulo: Painel de Qualidade — Eurofarma
+    resumo: Relatório executivo de controle de qualidade de produtos farmacêuticos, acompanhando desvios, lotes e indicadores de conformidade.
+    imagem: "assets/sample_study_1.png"
+    texto_md: |
+      Painel desenvolvido para a área de Qualidade da Eurofarma, com foco em rastreabilidade e conformidade de lotes.
+
+      **Principais análises:**
+      - Indicadores de não-conformidades por linha de produção
+      - Acompanhamento de desvios e ações corretivas (CAPA)
+      - Evolução temporal de ocorrências por categoria
+      - Comparativo entre plantas e períodos
+
+      **Stack:** Power BI · DAX · Power Query
+    tags: ["Power BI", "Qualidade", "Farmacêutico", "Conformidade", "DAX"]
+    links:
+      - ["Ver no Power BI", "https://app.powerbi.com/view?r=eyJrIjoiMzRiZDI5MTAtMTAwYy00ZTQ1LTgxNTktYjk0MTFmYjA0YjM5IiwidCI6ImU4YjhiMzE2LTUyNzYtNGFhNS1iODIxLWIxMDM5M2ZhM2E4YSJ9"]
+
+  - titulo: Análise de Cohorts — Retenção em Marketplace
+    resumo: Estudo exploratório de comportamento por safra de participantes, com foco em retenção, engajamento e resposta a campanhas.
+    imagem: "assets/sample_study_1.png"
+    texto_md: |
+      Este estudo analisa o comportamento de usuários de um marketplace segmentados por **cohort de entrada**,
+      permitindo comparar a evolução de métricas ao longo do tempo entre diferentes grupos.
+
+      **Principais análises:**
+      - Curvas de retenção por cohort (D1, D7, D30)
+      - Taxa de conversão por safra e canal de aquisição
+      - Segmentação por comportamento de compra e recência
+      - Recomendações para campanhas de reativação
+
+      **Stack:** SQL · Python (pandas) · Power BI
+    tags: ["Cohort", "Retenção", "SQL", "Python", "Marketplace"]
+    links: []
